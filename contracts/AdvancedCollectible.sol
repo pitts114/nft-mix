@@ -2,6 +2,7 @@ pragma solidity 0.6.6;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
+import "@mikker/contracts/SVG721.sol";
 
 contract AdvancedCollectible is ERC721, VRFConsumerBase {
     uint256 public tokenCounter;
@@ -60,13 +61,5 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         requestIdToTokenId[requestId] = newItemId;
         tokenCounter = tokenCounter + 1;
         emit ReturnedCollectible(requestId, randomNumber);
-    }
-
-    function setTokenURI(uint256 tokenId, string memory _tokenURI) public {
-        require(
-            _isApprovedOrOwner(_msgSender(), tokenId),
-            "ERC721: transfer caller is not owner nor approved"
-        );
-        _setTokenURI(tokenId, _tokenURI);
     }
 }
